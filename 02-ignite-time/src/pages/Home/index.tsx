@@ -34,19 +34,22 @@ export function Home() {
       minutesAmount: 0,
     },
   })
-  const { handleSubmit, watch /*, reset */ } = newCycleForm
+  const { handleSubmit, watch, reset } = newCycleForm
 
   /**
    * Prop Drilling -> Quando a gente tem Muitas propriedadses APENAs para comunicação entre componetes
    * Contex Api -> permite compartilharmos informaçãoes entre Vários componentes ao mesmo tempo
    */
-
+  function handleCreateNewCycle(data: NewCycleFormData) {
+    createNewCycle(data)
+    reset()
+  }
   const task = watch('task')
   const isSubmitDisabled = !task
 
   return (
     <HomeContainer>
-      <form onSubmit={handleSubmit(createNewCycle)} action="">
+      <form onSubmit={handleSubmit(handleCreateNewCycle)} action="">
         <FormProvider {...newCycleForm}>
           <NewCycleForm />
         </FormProvider>
